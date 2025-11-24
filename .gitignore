@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.vscode/
+.idea/
+*.sqlite3
+*.log
+*.pth
+/dist/
+/build/
+/__pycache__/
+.DS_Store
+model_weights/   # if you save any local model files

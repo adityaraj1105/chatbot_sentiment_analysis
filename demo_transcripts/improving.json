@@ -1,0 +1,15 @@
+{
+  "name": "improving",
+  "description": "Starts negative, becomes neutral, finishes positive — tests trend detection (Improving).",
+  "messages": [
+    "I'm really disappointed with how things are going.",
+    "It felt worse this morning.",
+    "It's not as bad as yesterday though.",
+    "Actually, I think things might work out.",
+    "Thanks for helping me figure this out!"
+  ],
+  "meta": {
+    "expected_trend": "Improving",
+    "notes": "Later positive messages should push overall sentiment positive using recency or neutral with mean."
+  }
+}

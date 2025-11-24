@@ -1,0 +1,157 @@
+{
+  "improving": {
+    "name": "improving",
+    "description": "Starts negative, becomes neutral, finishes positive — tests trend detection (Improving).",
+    "meta": {
+      "expected_trend": "Improving",
+      "notes": "Later positive messages should push overall sentiment positive using recency or neutral with mean."
+    },
+    "messages": [
+      "I'm really disappointed with how things are going.",
+      "It felt worse this morning.",
+      "It's not as bad as yesterday though.",
+      "Actually, I think things might work out.",
+      "Thanks for helping me figure this out!"
+    ],
+    "analysis": {
+      "per_message": [
+        {
+          "text": "I'm really disappointed with how things are going.",
+          "preprocessed": "I am really disappointed with how things are going.",
+          "label": "Negative",
+          "scores": {
+            "neg": 0.9767305254936218,
+            "neu": 0.023269474506378174,
+            "pos": 0.0,
+            "compound": -0.9767305254936218
+          },
+          "skipped": false
+        },
+        {
+          "text": "It felt worse this morning.",
+          "preprocessed": "It felt worse this morning.",
+          "label": "Negative",
+          "scores": {
+            "neg": 0.9657424688339233,
+            "neu": 0.03425753116607666,
+            "pos": 0.0,
+            "compound": -0.9657424688339233
+          },
+          "skipped": false
+        },
+        {
+          "text": "It's not as bad as yesterday though.",
+          "preprocessed": "It is not as bad as yesterday though.",
+          "label": "Neutral",
+          "scores": {
+            "neg": 0.0,
+            "neu": 1.0,
+            "pos": 0.0,
+            "compound": 0.0
+          },
+          "skipped": false
+        },
+        {
+          "text": "Actually, I think things might work out.",
+          "preprocessed": "Actually, I think things might work out.",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.23648154735565186,
+            "pos": 0.7635184526443481,
+            "compound": 0.7635184526443481
+          },
+          "skipped": false
+        },
+        {
+          "text": "Thanks for helping me figure this out!",
+          "preprocessed": "Thanks for helping me figure this out!",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.04581344127655029,
+            "pos": 0.9541865587234497,
+            "compound": 0.9541865587234497
+          },
+          "skipped": false
+        }
+      ],
+      "aggregate": {
+        "compound": 0.19945036695435858,
+        "label": "Positive"
+      },
+      "trend": "Improving"
+    }
+  },
+  "sarcasm": {
+    "name": "sarcasm",
+    "description": "Contains sarcastic sentences that commonly trip up sentiment models.",
+    "meta": {
+      "expected_trend": "Negative",
+      "notes": "Many models may classify sarcastic lines as positive; this tests robustness and whether you added sarcasm heuristics."
+    },
+    "messages": [
+      "Wow, great... this totally didn't waste my entire day.",
+      "Fantastic, just what I needed.",
+      "Oh perfect, another unexpected error. Good job!",
+      "Sure, I love it when things break at 3 AM."
+    ],
+    "analysis": {
+      "per_message": [
+        {
+          "text": "Wow, great... this totally didn't waste my entire day.",
+          "preprocessed": "Wow, great. this totally did not waste my entire day.",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.04752904176712036,
+            "pos": 0.9524709582328796,
+            "compound": 0.9524709582328796
+          },
+          "skipped": false
+        },
+        {
+          "text": "Fantastic, just what I needed.",
+          "preprocessed": "Fantastic, just what I needed.",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.0507810115814209,
+            "pos": 0.9492189884185791,
+            "compound": 0.9492189884185791
+          },
+          "skipped": false
+        },
+        {
+          "text": "Oh perfect, another unexpected error. Good job!",
+          "preprocessed": "Oh perfect, another unexpected error. Good job!",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.2415374517440796,
+            "pos": 0.7584625482559204,
+            "compound": 0.7584625482559204
+          },
+          "skipped": false
+        },
+        {
+          "text": "Sure, I love it when things break at 3 AM.",
+          "preprocessed": "Sure, I love it when things break at 3 AM.",
+          "label": "Positive",
+          "scores": {
+            "neg": 0.0,
+            "neu": 0.081479012966156,
+            "pos": 0.918520987033844,
+            "compound": 0.918520987033844
+          },
+          "skipped": false
+        }
+      ],
+      "aggregate": {
+        "compound": 0.8876884515046426,
+        "label": "Positive"
+      },
+      "trend": "Worsening"
+    }
+  }
+}

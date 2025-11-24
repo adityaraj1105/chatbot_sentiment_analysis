@@ -1,0 +1,14 @@
+{
+  "name": "sarcasm",
+  "description": "Contains sarcastic sentences that commonly trip up sentiment models.",
+  "messages": [
+    "Wow, great... this totally didn't waste my entire day.",
+    "Fantastic, just what I needed.",
+    "Oh perfect, another unexpected error. Good job!",
+    "Sure, I love it when things break at 3 AM."
+  ],
+  "meta": {
+    "expected_trend": "Negative",
+    "notes": "Many models may classify sarcastic lines as positive; this tests robustness and whether you added sarcasm heuristics."
+  }
+}
