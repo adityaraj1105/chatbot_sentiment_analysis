@@ -113,7 +113,7 @@ new_compound = -abs(original_compound) * 0.75
 
 This gently turns sarcastic praise into mild negativity.
 
-3. Conversation-Level Aggregation
+## 3. **Conversation-Level Aggregation**
 
 Two modes:
 
@@ -122,7 +122,7 @@ overall = average(compound_scores)
 Recency-weighted:
 weight = 0.8^(distance_from_end)
 
-4. Trend Analysis
+## 4. **Trend Analysis**
 
 Compares early and late conversation sentiment:
 
@@ -132,7 +132,7 @@ else         → Stable
 
 
 
-▶️ How to Run the Project 
+#▶️ How to Run the Project 
 
 1. Install dependencies
 pip install -r requirements.txt
