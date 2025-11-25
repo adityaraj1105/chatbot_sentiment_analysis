@@ -109,7 +109,6 @@ compound_final = (compound_hf + compound_vader) / 2
 ## 2. **Sarcasm Adjustment**
 If sarcasm is detected and the message is originally positive:
 
-```python
 new_compound = -abs(original_compound) * 0.75
 
 This gently turns sarcastic praise into mild negativity.
