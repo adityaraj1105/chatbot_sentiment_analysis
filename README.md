@@ -1,146 +1,181 @@
 # Chatbot with Sentiment, Emotion & Sarcasm Analysis  
-### A Modular AI-Powered Conversational System (Tier-1 + Tier-2 Completed + Enhancements)
+### A Modular AI-Powered Conversational System  
+**(Assignment: Tier-1 Completed ✔ | Tier-2 Completed ✔ | Enhancements Added ⭐)**
 
-This project implements an interactive chatbot capable of:
-
-- Maintaining full conversation history  
-- Performing **conversation-level sentiment analysis**  
-- Performing **per-message sentiment analysis**  
-- Estimating **emotion labels** (optional HF model)  
-- Detecting **sarcasm** (HF + heuristic hybrid)  
-- Identifying sentiment **trends** across the conversation  
-- Running via **Command Line Interface (CLI)**  
-- Running via a full **Streamlit Web Application**
-
-The system is designed to be modular, extensible, and production-friendly.
+This project implements a conversational chatbot that performs both **conversation-level** and **message-level** sentiment analysis, fulfilling all requirements of the assignment.  
+In addition, the system includes multiple advanced enhancements: sarcasm detection, emotion tagging, ensemble scoring, and a Streamlit UI.
 
 ---
 
-## 🚀 Features
+# 🎯 Assignment Compliance Summary
 
-### ✔ Tier 1 (Mandatory)
-- Maintains full conversation history  
-- Computes **overall conversation sentiment**  
-- Outputs final aggregate sentiment (Mean / Recency Weighted)
+## ✔ **Tier 1 — Mandatory (Completed)**  
+- Maintains **full conversation history**  
+- Generates **overall conversation sentiment** at the end  
+- Indicates **overall emotional direction** (Positive / Negative / Neutral)  
+
+## ✔ **Tier 2 — Additional Credit (Completed)**  
+- Performs **sentiment evaluation per user message**  
+- Displays the per-message sentiment output  
+- Provides **trend analysis** of mood shifts across the full conversation  
+
+## ⭐ Optional Enhancements (Bonus Credit)  
+- Sarcasm detection (HF model + heuristics)  
+- Emotion classification  
+- Ensemble sentiment scoring (HF + VADER)  
+- Streamlit web application  
+- Export conversation transcript  
+- Reset functionality  
+- Clean modular structure with extendable components  
 
 ---
 
-### ✔ Tier 2 (Additional Credit)
-- Sentiment evaluation for **every user message**  
-- Displays per-message scores (neg, neu, pos, compound)  
-- Summarizes **trend / mood shift** across conversation  
+# 📦 Features Overview
 
----
+### ✔ Conversation-Level Sentiment  
+- Aggregates sentiment across all user messages  
+- Supports mean & recency-weighted averaging  
 
-### ⭐ Additional Enhancements (Bonus Features)
-These make the project stand out significantly:
+### ✔ Message-Level Sentiment  
+- neg / neu / pos / compound scores  
+- Label classification (Positive, Negative, Neutral)  
 
-#### 🔥 **Sarcasm Detection Module**
-- Uses Hugging Face model (`mohitjain/sarcasm-roberta`) if available  
-- Includes custom heuristic fallback  
-- Adjusts sentiment when sarcasm is detected (positive → negative)  
-- Visible in conversation + analysis dashboard
+### ✔ Sarcasm Detection (Advanced)  
+- Uses Hugging Face sarcasm model if available  
+- Falls back to heuristic sarcasm patterns  
+- Adjusts sentiment (positive sarcasm → negative)  
 
-#### 🎭 **Emotion Classification (Optional)**
-- Integrates with HF model:  
-  `j-hartmann/emotion-english-distilroberta-base`  
-- Adds emotion labels (e.g., joy, anger, sadness, fear)
+### ✔ Emotion Recognition  
+- Uses HF model: `j-hartmann/emotion-english-distilroberta-base`  
+- Detects emotions like joy, sadness, anger, fear  
 
-#### 🔗 **Ensemble Sentiment Scoring**
-- HF model + VADER are blended for improved robustness  
-- Fixes the issue of HF giving false positives for subtle negativity
+### ✔ Ensemble Sentiment (HF + VADER)  
+- Blends transformer-based sentiment with VADER  
+- Improves accuracy on nuanced text  
 
-#### 📊 **Streamlit Web UI**
-- Shows conversation on left, analytics on right  
-- Table view of per-message scores  
-- Trend plot (compound over time)  
+### ✔ Streamlit Web UI  
+- Clean split view: Chat (left) + Analytics (right)  
+- Per-message table with sentiment, emotion, sarcasm  
+- Timeline plot of compound scores  
 - Export transcript as JSON  
-- Reset conversation button
+- Reset conversation button  
 
 ---
 
-## 📁 Folder Structure
+# 📁 Folder Structure
 
 chatbot_sentiment_analysis/
 │
 ├── src/
 │ ├── chatbot.py # Chatbot logic
 │ ├── sentiment.py # HF + VADER sentiment engine
-│ ├── sarcasm.py # Sarcasm detector (HF + heuristic)
-│ ├── utils.py # Preprocessing + formatting utilities
-│ └── tests/ # Optional: pytest-based tests
+│ ├── sarcasm.py # Sarcasm detector
+│ ├── utils.py # Helper preprocessing + formatting
+│ └── tests/ # (Optional) Pytest tests
 │
-├── webapp.py # Streamlit UI
-├── main.py # CLI entrypoint
+├── webapp.py # Streamlit Web Application
+├── main.py # CLI application entry point
 ├── requirements.txt
 └── README.md
 
+
 ---
 
-## 🛠 Technologies Used
+# 🛠 Technologies Used
 
 - **Python 3.9+**
-- **NLTK VADER** sentiment analyzer  
-- **Hugging Face Transformers** (`pipeline`)  
-- **Streamlit** for UI  
-- **Matplotlib** for graphs  
-- **Regex-based heuristic sarcasm detection**
+- **NLTK VADER** (sentiment analysis)  
+- **Hugging Face Transformers** (sentiment, emotion, sarcasm)  
+- **Streamlit** (web interface)  
+- **Matplotlib** (sentiment timeline plotting)  
+- **Regex + heuristic rules** (fallback sarcasm detection)  
 
 ---
 
-## 🧠 Sentiment Logic
+# 🧠 Sentiment Logic Explained (As Required)
 
-### 1. **Token-level → Compound score**
-- HF output (POS / NEG / NEU) is converted into compound [-1,1]
-- VADER compound score is also computed
-- When ensemble mode is ON → **average(compound_HF, compound_VADER)**
+The sentiment analysis consists of three main components:
 
-### 2. **Sarcasm Adjustment**
-If sarcasm is detected **and original sentiment is positive**:
+## 1. **Message-Level Scoring**
+Each user message is scored using:
 
-```new_compound = -abs(original_compound) * 0.75```
+- HF Transformer model → POS/NEG/NEU probabilities  
+- VADER → Lexical rule-based sentiment  
 
-Meaning:
-- Positive sarcastic messages become negative  
-- Strength is moderately attenuated to avoid overcorrection  
+If **ensemble mode** is ON:
+compound_final = (compound_hf + compound_vader) / 2
 
-### 3. **Conversation Aggregation**
-Two strategies available:
-mean — global average
-recency — last messages weighted more heavily
 
-### 4. **Trend Extraction**
-Compare early-half sentiment vs late-half sentiment:
-delta > 0.05 → Improving
-delta < -0.05 → Worsening
-else → Stable
+## 2. **Sarcasm Adjustment**
+If sarcasm is detected and the message is originally positive:
 
----
+```python
+new_compound = -abs(original_compound) * 0.75
 
-## ▶ Running the Project
+This gently turns sarcastic praise into mild negativity.
 
-### **1. Install dependencies**
-```bash
+3. Conversation-Level Aggregation
+
+Two modes:
+
+Mean (default):
+overall = average(compound_scores)
+Recency-weighted:
+weight = 0.8^(distance_from_end)
+
+4. Trend Analysis
+
+Compares early and late conversation sentiment:
+
+delta > 0.05 → Improving  
+delta < -0.05 → Worsening  
+else         → Stable
+
+
+
+▶️ How to Run the Project 
+
+1. Install dependencies
 pip install -r requirements.txt
-
-2. Run CLI Version
-- python src/main.py
+2. Run the Command-Line Chatbot (CLI)
+python src/main.py
 
 You will see:
+-Interactive conversation
+-Per-message sentiment
+-Overall sentiment
+-Trend analysis
 
-- Chat interaction
-- Final sentiment report
-- Per-message results
+3. Run the Streamlit Web Application
+streamlit run webapp.py
 
-3. Run Streamlit Web App
+The web UI includes:
+-Chat viewer
+-Sentiment classification
+-Emotion tags
+-Sarcasm markers
+-Trend graph
+-Export function
+-Reset button
 
-- streamlit run webapp.py
+🧪 Status of Tests (As Required)
 
-The UI includes:
+Tests are optional per assignment — if tests are included, they cover:
+-Sentiment scoring
+-Sarcasm heuristic detection
+-Conversation aggregation
+-CLI behavior
 
-- Chat window
-- Sentiment scores
-- Emotion labels
-- Sarcasm indicator
-- Adjustable model settings
-- Reset + Export options
+To run tests:
+pytest
+
+⭐ Highlights of Innovations
+
+This project goes beyond assignment requirements by adding:
+-Sarcasm-aware sentiment correction
+-Emotion classification using transformer models
+-Ensemble sentiment scoring
+-Streamlit analytics dashboard
+-Exportable JSON transcripts
+-Error-safe modular architecture
+-Heuristics + ML hybrid design
