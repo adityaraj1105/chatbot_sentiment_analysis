@@ -132,11 +132,12 @@ else         → Stable
 
 
 
-#▶️ How to Run the Project 
+# ▶️ How to Run the Project 
 
-1. Install dependencies
+## 1. Install dependencies
 pip install -r requirements.txt
-2. Run the Command-Line Chatbot (CLI)
+
+## 2. Run the Command-Line Chatbot (CLI)
 python src/main.py
 
 You will see:
@@ -145,7 +146,7 @@ You will see:
 -Overall sentiment
 -Trend analysis
 
-3. Run the Streamlit Web Application
+## 3. Run the Streamlit Web Application
 streamlit run webapp.py
 
 The web UI includes:
@@ -157,7 +158,7 @@ The web UI includes:
 -Export function
 -Reset button
 
-🧪 Status of Tests (As Required)
+# 🧪 Status of Tests (As Required)
 
 Tests are optional per assignment — if tests are included, they cover:
 -Sentiment scoring
@@ -168,7 +169,7 @@ Tests are optional per assignment — if tests are included, they cover:
 To run tests:
 pytest
 
-⭐ Highlights of Innovations
+# ⭐ Highlights of Innovations
 
 This project goes beyond assignment requirements by adding:
 -Sarcasm-aware sentiment correction
